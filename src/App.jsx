@@ -1,8 +1,15 @@
+import Header from './layouts/Header'
+import Footer from './layouts/Footer'
+import Main from './layouts/Main'
+
 const App = () => {
+
   return (
-    <div>
-      <h1>To Do List</h1>
-    </div>
+    <>
+      <Header />
+      <Main />
+      <Footer/>
+    </>
   )
 }
 
