@@ -1,0 +1,17 @@
+@use '@/styles/functions' as *;
+
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-light);
+  align-items: center;
+  justify-content: space-between;
+  padding: rem(20);
+
+  &__actions {
+    display: flex;
+    gap: rem(12);
+  }
+}

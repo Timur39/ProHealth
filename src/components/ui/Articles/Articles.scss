@@ -1,0 +1,15 @@
+@use '@/styles/functions' as *;
+
+.articles {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: rem(40);
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(20);
+
+  }
+}

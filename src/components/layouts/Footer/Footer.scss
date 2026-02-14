@@ -1,0 +1,20 @@
+@use '@/styles/functions' as *;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: rem(20);
+  background-color: var(--color-gray);
+  color: #333;
+  font-size: rem(14);
+
+  &__logo {
+    font-size: 1.4rem;
+  }
+
+  &__socials-list {
+    display: flex;
+    gap: rem(12);
+  }
+}

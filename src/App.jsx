@@ -1,15 +1,17 @@
-import Header from './layouts/Header'
-import Footer from './layouts/Footer'
-import Main from './layouts/Main'
+import {Route, Routes} from 'react-router-dom'
+import Home from './pages/Home'
+import Articles from './pages/Articles'
+import ArticlePage from './pages/ArticlePage'
+import './styles/globals.scss'
 
 const App = () => {
 
   return (
-    <>
-      <Header />
-      <Main />
-      <Footer/>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/articles" element={<Articles />} />
+      <Route path="/articles/:slug" element={<ArticlePage />} />
+    </Routes>
   )
 }
 

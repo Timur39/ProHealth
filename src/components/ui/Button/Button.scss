@@ -1,0 +1,33 @@
+@use '@/styles/functions' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem(8) rem(15);
+  border: rem(1) solid var(--color-accent);
+  border-radius: 4px;
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  font-size: rem(15);
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+  &--transparent {
+    background-color: transparent;
+    color: var(--color-accent);
+
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-light);
+    }
+  }
+}

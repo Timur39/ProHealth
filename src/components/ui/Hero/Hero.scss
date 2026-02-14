@@ -1,0 +1,13 @@
+@use '@/styles/functions' as *;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: rem(100);
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  gap: rem(10);
+  margin-bottom: rem(40);
+}
