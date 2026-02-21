@@ -1,4 +1,6 @@
 @use '@/styles/functions' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/media' as *;
 
 .button {
   display: inline-flex;
@@ -28,6 +30,16 @@
     &:hover {
       background-color: var(--color-accent);
       color: var(--color-light);
+    }
+  }
+
+  &--link {
+    a {
+      text-decoration: none;
+
+      @include hover {
+        color: var(--color-light);
+      }
     }
   }
 }

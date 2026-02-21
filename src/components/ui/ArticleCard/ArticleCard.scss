@@ -1,0 +1,23 @@
+@use '@/styles/media' as *;
+@use '@/styles/functions' as *;
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+  padding: rem(10);
+  border: var(--border);
+  background-color: #fff;
+  border-radius: 8px;
+
+  &__image {
+    width: max-content;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  @include hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  }
+}

@@ -1,0 +1,27 @@
+@use "@/styles/functions" as *;
+@use "@/styles/media" as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
+
+  &__label {
+    font-weight: bold;
+  }
+
+  &__input {
+    padding: rem(12);
+    border: var(--border);
+    border-radius: 4px;
+    transition-duration: var(--transition-duration);
+
+    &:focus {
+      box-shadow: var(--color-accent) 0 0 0 1.5px;
+    }
+
+    @include hover {
+      border-color: var(--color-accent);
+    }
+  }
+}

@@ -1,10 +1,15 @@
 import './Button.scss'
 
 const Button = (props) => {
-  const { className, children } = props
+  const {
+    className = '',
+    type = "button",
+    children,
+    onClick,
+  } = props
 
   return (
-    <button className={`button ${className}`} type="submit">
+    <button className={`button ${className}`} type={type} onClick={onClick}>
       {children}
     </button>
   )

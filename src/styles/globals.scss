@@ -40,29 +40,13 @@ main {
   flex: 1;
 }
 
-//h1,
-//.h1,
-//h2,
-//.h2,
-//h3,
-//.h3,
-//h4,
-//.h4,
-//h5,
-//.h5,
-//h6,
-//.h6 {
-//  color: var(--color-dark);
-//}
-
 h1,
 .h1,
 h2,
 .h2,
 h3,
 .h3 {
-  font-family: var(--font-family-accent), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h4,
@@ -71,12 +55,12 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h1,
 .h1 {
-  @include fluid-text(58, 30);
+  @include fluid-text(52, 30);
 
   line-height: 1.2;
 }
@@ -95,17 +79,17 @@ h3,
 
 h4,
 .h4 {
-  @include fluid-text(16, 18);
+  @include fluid-text(18, 14);
 }
 
 h5,
 .h5 {
-  @include fluid-text(14, 18);
+  @include fluid-text(16, 12);
 }
 
 h6,
 .h6 {
-  @include fluid-text(10, 16);
+  @include fluid-text(14, 10);
 }
 
 a,

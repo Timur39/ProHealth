@@ -3,13 +3,14 @@
   --color-dark: #000;
   --color-light: #fff;
   --color-gray: #f8f8f8;
+  --color-gray-alt: #ccc;
   --color-accent: #10b981;
-  --font-family-base: "Inter", sans-serif;
+  --font-family-base: "Montserrat", sans-serif;
   --font-family-accent: "Kumbh Sans", sans-serif;
   --container-width: 100rem;
   --container-padding-x: 1rem;
   --transition-duration: 0.2s;
-  --border: 0.0625rem solid var(--color-gray);
+  --border: 0.0625rem solid var(--color-gray-alt);
   --shadow: 0 0 0 0.25rem #191919;
 }
 
@@ -211,6 +212,34 @@ svg * {
     scroll-behavior: auto !important;
   }
 }
+@font-face {
+  font-family: "Montserrat Regular";
+  src: url("../assets/fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat Medium";
+  src: url("../assets/fonts/Montserrat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat SemiBold";
+  src: url("../assets/fonts/Montserrat-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url("../assets/fonts/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 html {
   overflow-y: scroll;
 }
@@ -249,8 +278,7 @@ h2,
 .h2,
 h3,
 .h3 {
-  font-family: var(--font-family-accent), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h4,
@@ -259,12 +287,12 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h1,
 .h1 {
-  font-size: clamp(1.875rem, 1.3109504132rem + 2.3140495868vw, 3.625rem);
+  font-size: clamp(1.875rem, 1.4318181818rem + 1.8181818182vw, 3.25rem);
   line-height: 1.2;
 }
 
@@ -281,17 +309,17 @@ h3,
 
 h4,
 .h4 {
-  font-size: clamp(1.125rem, 1.1652892562rem + -0.1652892562vw, 1rem);
+  font-size: clamp(0.875rem, 0.7944214876rem + 0.3305785124vw, 1.125rem);
 }
 
 h5,
 .h5 {
-  font-size: clamp(1.125rem, 1.2055785124rem + -0.3305785124vw, 0.875rem);
+  font-size: clamp(0.75rem, 0.6694214876rem + 0.3305785124vw, 1rem);
 }
 
 h6,
 .h6 {
-  font-size: clamp(1rem, 1.1208677686rem + -0.4958677686vw, 0.625rem);
+  font-size: clamp(0.625rem, 0.5444214876rem + 0.3305785124vw, 0.875rem);
 }
 
 a,

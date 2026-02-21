@@ -1,11 +1,18 @@
 import {useParams} from 'react-router-dom'
+import Header from '@/components/layouts/Header/Header'
+import Footer from '@/components/layouts/Footer/Footer'
+import Article from '@/components/ui/Article'
 
 const ArticlePage = () => {
-  const { slug } = useParams()
+  const { slug, title, description, img, author } = useParams()
 
   return (
     <>
-      <h1>Статья: {slug}</h1>
+      <Header />
+      <main>
+        <Article />
+      </main>
+      <Footer />
     </>
   )
 }

@@ -4,9 +4,10 @@
   --color-dark: #000;
   --color-light: #fff;
   --color-gray: #f8f8f8;
+  --color-gray-alt: #ccc;
   --color-accent: #10b981;
 
-  --font-family-base: 'Inter', sans-serif;
+  --font-family-base: 'Montserrat', sans-serif;
   --font-family-accent: 'Kumbh Sans', sans-serif;
 
   --container-width: #{rem(1600)};
@@ -14,7 +15,7 @@
 
   --transition-duration: 0.2s;
 
-  --border: #{rem(1)} solid var(--color-gray);
+  --border: #{rem(1)} solid var(--color-gray-alt);
 
   --shadow: 0 0 0 #{rem(4)} #191919;
 }

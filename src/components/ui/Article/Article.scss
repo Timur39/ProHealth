@@ -2,22 +2,41 @@
 @use '@/styles/functions' as *;
 
 .article {
-  display: flex;
-  flex-direction: column;
-  gap: rem(12);
-  padding: rem(10);
-  border: var(--border);
-  background-color: #fff;
-  border-radius: 8px;
-
-  &__image {
-    width: max-content;
-    height: auto;
-    border-radius: 4px;
+  .article__body {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    padding: rem(32) rem(32);
+    border-bottom: 2px solid var(--color-gray-alt);
+    background-color: var(--color-gray);
   }
 
-  @include hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  .article__title {
+    font-weight: bold;
+  }
 
+  .article__description {
+    font-size: rem(18);
+  }
+
+  .article__meta {
+    display: flex;
+    gap: rem(8);
+    font-size: rem(16);
+  }
+
+  .article__buttons {
+    display: flex;
+    gap: rem(16);
+  }
+
+  .article__button {
+    max-width: rem(160);
+    min-width: rem(100);
+  }
+
+  .article__content {
+    font-size: rem(16);
+    padding: rem(32);
   }
 }
