@@ -6,13 +6,21 @@
     display: flex;
     flex-direction: column;
     gap: rem(16);
-    padding: rem(32) rem(32);
+    padding: rem(32);
     border-bottom: 2px solid var(--color-gray-alt);
     background-color: var(--color-gray);
+
+    @include mobile {
+      padding: rem(24);
+    }
   }
 
   .article__title {
     font-weight: bold;
+
+    @include mobile {
+      font-size: rem(28);
+    }
   }
 
   .article__description {
@@ -28,15 +36,31 @@
   .article__buttons {
     display: flex;
     gap: rem(16);
+
+    @include mobile {
+      gap: rem(8);
+    }
   }
 
   .article__button {
-    max-width: rem(160);
+    max-width: rem(180);
     min-width: rem(100);
+
+    @include mobile {
+      padding: rem(8) rem(12);
+    }
+
+    @include mobile-s {
+      padding: rem(6) rem(10);
+    }
   }
 
   .article__content {
     font-size: rem(16);
     padding: rem(32);
+
+    @include mobile {
+      padding: rem(16);
+    }
   }
 }

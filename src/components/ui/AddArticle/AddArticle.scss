@@ -1,11 +1,12 @@
 @use "@/styles/functions" as *;
+@use "@/styles/media" as *;
 
 .add-article {
   display: flex;
   flex-direction: column;
   gap: rem(32);
-  padding-block: rem(32);
-  margin-inline: 5rem;
+  padding-block: fluid(32, 24);
+  margin-inline: fluid(80, 10);
 
   &__header {
     display: flex;
@@ -14,6 +15,10 @@
 
     &-title {
       font-weight: bold;
+
+      @include mobile {
+        font-size: rem(28);
+      }
     }
   }
 

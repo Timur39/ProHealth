@@ -48,7 +48,7 @@ const Article = (props) => {
               ВКонтакте
             </a>
           </Button>
-          <Button className="button--transparent" onClick={copyLink}>
+          <Button className="article__button button--transparent" onClick={copyLink}>
             Скопировать ссылку
           </Button>
         </div>
