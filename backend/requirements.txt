@@ -1,0 +1,10 @@
+fastapi
+asyncpg
+redis
+uvicorn
+sqlalchemy
+pydantic
+alembic
+python-jose
+passlib[bcrypt]
+fastapi_cache

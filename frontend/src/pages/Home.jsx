@@ -2,6 +2,7 @@ import Header from '@/components/layouts/Header/Header'
 import Footer from '@/components/layouts/Footer/Footer'
 import Hero from '@/components/ui/Hero/Hero'
 import Articles from '@/components/ui/Articles/Articles'
+import articlesAPI from '../services/api'
 
 const Home = () => {
 
@@ -26,9 +27,12 @@ const Home = () => {
     },
   ]
 
+  const data = articlesAPI.test().then(res => res)
+
   return (
     <>
       <Header />
+      <h1>{data}</h1>
       <main>
         <Hero />
         <Articles articles={articles}/>
