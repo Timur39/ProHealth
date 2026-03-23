@@ -41,7 +41,7 @@ const AddArticle = () => {
           name="content"
           label="Содержание статьи *"
           type="textarea"
-          placeholder="Напишите полный текст статии здесь..."
+          placeholder="Напишите полный текст статьи здесь..."
           required
         />
         <Field
