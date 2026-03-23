@@ -1,32 +1,131 @@
-from app.dependencies.db import sessionDep
-from app.models.article import ArticleModel
+import re
 
+from fastapi import HTTPException
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.models.article import Article
 
 class ArticleService:
-    # Получить все статьи
+
+    # Генерация уникального slug'а на основе заголовка статьи
     @staticmethod
-    async def get_all_articles(article_data, db: sessionDep):
-        article = ArticleModel(slug=article_data.slug,
-                               title=article_data.title,
-                               content=article_data.content)
+    async def generate_unique_slug(db: AsyncSession, title: str) -> str:
+        base_slug = re.sub(r"[^\w\s-]", "", title.lower()).strip()
+        base_slug = re.sub(r"\s+", "-", base_slug)
+        
+        slug = base_slug
+        index = 1
+
+        while True:
+            result = await db.execute(select(Article).where(Article.slug == slug))
+            exists = result.scalar_one_or_none()
+
+            if not exists:
+                return slug
+            
+            slug = f"{base_slug}-{index}"
+            index += 1
+
+    # Добавление новой статьи
+    @staticmethod
+    async def create_article(
+        title: str,
+        content: str,
+        db: AsyncSession,
+        author_id: int,
+    ):
+        slug = await ArticleService.generate_unique_slug(title, db)
+
+        article = Article(
+            title=title,
+            content=content,
+            slug=slug,
+            author_id=author_id)
+        
         db.add(article)
         await db.commit()
+        await db.refresh(article)
+
+        return article
+    
+    # Получение всех статей
+    @staticmethod
+    async def get_all_articles(db: AsyncSession):
+        result = await db.execute(select(Article))
+
+        return result.scalars().all()
+
+    # Получение статьи по slug'у
+    @staticmethod
+    async def get_article_by_slug(slug: str, db: AsyncSession):
+        result = await db.execute(select(Article).where(Article.slug == slug))
+        article = result.scalar_one_or_none()
+
+        if not article:
+            raise HTTPException(status_code=404, detail="Article not found")
+        
+        return article
+    
+    # Получение статьи по id
+    @staticmethod
+    async def get_article_by_id(article_id: int, db: AsyncSession):
+        result = await db.execute(select(Article).where(Article.id == article_id))
+        article = result.scalar_one_or_none()
+
+        if not article:
+            raise HTTPException(status_code=404, detail="Article not found")
+        
         return article
 
+    # Обновление статьи
     @staticmethod
-    async def get_article_by_slug(article_slug: int, db: sessionDep):
-        article = await db.get(ArticleModel, id=article_slug)
+    async def update_article(
+        db: AsyncSession,
+        article_id: int,
+        title: str,
+        content: str,
+        author_id: int,
+    ):
+        article = await ArticleService.get_article_by_id(article_id, db)
 
+        # 🔒 Проверка владельца
+        if article.author_id != author_id:
+            raise HTTPException(status_code=403, detail="Нет доступа")
+
+        # если изменился title → обновить slug
+        if article.title != title:
+            article.slug = await ArticleService.generate_unique_slug(db, title)
+
+        article.title = title
+        article.content = content
+        article.status = "pending"
+
+        await db.commit()
+        await db.refresh(article)
+
+        return article
+
+    # Удаление статьи
     @staticmethod
-    async def create_article(article_data, db: sessionDep):
-        article_slug = article_data.slug.lower().replace('', '-')
+    async def delete_article(
+        db: AsyncSession,
+        article_id: int,
+        author_id: int
+    ):
+        result = await db.execute(
+            select(Article).where(Article.id == article_id)
+        )
+        article = result.scalar_one_or_none()
 
+        if not article:
+            return False
 
-    @staticmethod
-    async def update_article():
-        pass
+        # 🔒 Проверка владельца
+        if article.author_id != author_id:
+            raise HTTPException(status_code=403, detail="Нет доступа")
 
-    @staticmethod
-    async def delete_article():
-        pass
+        await db.delete(article)
+        await db.commit()
 
+        return {"message": "Article deleted successfully" }

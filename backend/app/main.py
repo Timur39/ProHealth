@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import articles
+from app.routes import articles, auth
 
 
 app = FastAPI(title="ProHealth API")
 
 app.include_router(articles.router)
+app.include_router(auth.router)
 
 app.add_middleware(
     CORSMiddleware,
