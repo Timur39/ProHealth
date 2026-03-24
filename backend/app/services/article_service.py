@@ -1,6 +1,8 @@
 import re
 
 from fastapi import HTTPException
+
+from sqlalchemy.orm import selectinload
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -59,7 +61,7 @@ class ArticleService:
     # Получение статьи по slug'у
     @staticmethod
     async def get_article_by_slug(slug: str, db: AsyncSession):
-        result = await db.execute(select(Article).where(Article.slug == slug))
+        result = await db.execute(select(Article).options(selectinload(Article.author)).where(Article.slug == slug))
         article = result.scalar_one_or_none()
 
         if not article:

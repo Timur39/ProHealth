@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-# from fastapi_cache.decorator import cache
+from fastapi_cache.decorator import cache
 from app.dependencies.db import sessionDep
 from app.dependencies.auth import userDep
 from app.schemas.article import ArticleCreate, ArticleResponse
@@ -8,12 +8,12 @@ from app.services.article_service import ArticleService
 router = APIRouter(prefix='/articles', tags=['Articles'])
 
 @router.get('/', response_model=list[ArticleResponse], summary='Получить все статьи')
-# @cache(expire=360)
+@cache(expire=60)
 async def get_all_articles_router(db: sessionDep):
     return await ArticleService.get_all_articles(db)
 
 @router.get('/{slug}', summary="Получить статью по slug'у")
-# @cache(expire=360)
+@cache(expire=300)
 async def get_article_by_slug_router(slug: str, db: sessionDep):
     return await ArticleService.get_article_by_slug(slug, db)
 

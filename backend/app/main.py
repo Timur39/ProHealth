@@ -1,12 +1,32 @@
+import redis
+
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+
 from app.routes import articles, auth
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Здесь можно добавить код для инициализации ресурсов при запуске приложения
+    redis_client = redis.from_url(
+        "redis://localhost",
+        encoding="utf-8",
+        decode_responses=True
+    )
+    FastAPICache.init(RedisBackend(redis_client), prefix="fastapi-cache")
 
-app = FastAPI(title="ProHealth API")
+    app.include_router(articles.router)
+    app.include_router(auth.router)
 
-app.include_router(articles.router)
-app.include_router(auth.router)
+    yield
+    # Здесь можно добавить код для очистки ресурсов при завершении приложения
+
+
+app = FastAPI(title="ProHealth API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
