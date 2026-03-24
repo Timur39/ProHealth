@@ -9,5 +9,6 @@ class User(Base):
     email = Column(String, unique=True)
     name = Column(String, unique=True)
     password = Column(String)
+    role = Column(String, default="user")
 
     articles = relationship("Article", back_populates="author")

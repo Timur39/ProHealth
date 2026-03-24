@@ -32,3 +32,11 @@ async def get_current_user(
     return user
 
 userDep = Annotated[User, Depends(get_current_user)]
+
+
+async def get_admin_user(current_user: userDep):
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Not enough permissions")
+    return current_user
+
+adminDep = Annotated[User, Depends(get_admin_user)]

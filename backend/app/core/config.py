@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     DATABASE_URL: str
+    ADMIN_EMAIL: str
     MODE: str
 
     model_config = SettingsConfigDict(env_file=".env")

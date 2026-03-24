@@ -34,6 +34,7 @@ def run_migrations_offline():
         url=DATABASE_URL,
         target_metadata=target_metadata,
         literal_binds=True,
+        render_as_batch=True,
     )
 
     with context.begin_transaction():

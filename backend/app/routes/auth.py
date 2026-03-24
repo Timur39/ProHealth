@@ -5,6 +5,7 @@ from app.dependencies.db import sessionDep
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin
 from app.core.security import hash_password, verify_password, create_access_token
+from app.core.config import settings
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -19,7 +20,9 @@ async def register(user: UserCreate, db: sessionDep):
 
     new_user = User(
         email=user.email,
-        password=hash_password(user.password)
+        password=hash_password(user.password),
+        name=user.name,
+        role="admin" if user.email == settings.ADMIN_EMAIL else "user"
     )
 
     db.add(new_user)

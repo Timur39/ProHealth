@@ -2,6 +2,7 @@ import re
 
 from fastapi import HTTPException
 
+from fastapi_cache import FastAPICache
 from sqlalchemy.orm import selectinload
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -37,7 +38,7 @@ class ArticleService:
         db: AsyncSession,
         author_id: int,
     ):
-        slug = await ArticleService.generate_unique_slug(title, db)
+        slug = await ArticleService.generate_unique_slug(db, title)
 
         article = Article(
             title=title,
@@ -48,6 +49,8 @@ class ArticleService:
         db.add(article)
         await db.commit()
         await db.refresh(article)
+
+        await FastAPICache.clear()
 
         return article
     
@@ -64,9 +67,6 @@ class ArticleService:
         result = await db.execute(select(Article).options(selectinload(Article.author)).where(Article.slug == slug))
         article = result.scalar_one_or_none()
 
-        if not article:
-            raise HTTPException(status_code=404, detail="Article not found")
-        
         return article
     
     # Получение статьи по id
@@ -74,9 +74,6 @@ class ArticleService:
     async def get_article_by_id(article_id: int, db: AsyncSession):
         result = await db.execute(select(Article).where(Article.id == article_id))
         article = result.scalar_one_or_none()
-
-        if not article:
-            raise HTTPException(status_code=404, detail="Article not found")
         
         return article
 
@@ -106,6 +103,8 @@ class ArticleService:
         await db.commit()
         await db.refresh(article)
 
+        await FastAPICache.clear()
+
         return article
 
     # Удаление статьи
@@ -130,4 +129,48 @@ class ArticleService:
         await db.delete(article)
         await db.commit()
 
+        await FastAPICache.clear()
+
         return {"message": "Article deleted successfully" }
+    
+    # 📋 Получение pending статей
+    @staticmethod
+    async def get_pending_articles(db: AsyncSession):
+        result = await db.execute(
+            select(Article).where(Article.status == "pending")
+        )
+        return result.scalars().all()
+    
+    # ✅ Одобрение статьи
+    @staticmethod
+    async def approve_article(db: AsyncSession, article_id: int):
+        article = await ArticleService.get_article_by_id(article_id, db)
+        
+        if not article:
+            return None
+
+        article.status = "approved"
+
+        await db.commit()
+        await db.refresh(article)
+
+        await FastAPICache.clear()
+
+        return article
+
+    # ❌ Отклонение статьи
+    @staticmethod
+    async def reject_article(db: AsyncSession, article_id: int):
+        article = await ArticleService.get_article_by_id(article_id, db)
+        
+        if not article:
+            return None
+
+        article.status = "rejected"
+
+        await db.commit()
+        await db.refresh(article)
+
+        await FastAPICache.clear()
+
+        return article

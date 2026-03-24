@@ -15,7 +15,12 @@ async def get_all_articles_router(db: sessionDep):
 @router.get('/{slug}', summary="Получить статью по slug'у")
 @cache(expire=300)
 async def get_article_by_slug_router(slug: str, db: sessionDep):
-    return await ArticleService.get_article_by_slug(slug, db)
+    article = await ArticleService.get_article_by_slug(slug, db)
+
+    if not article:
+        raise HTTPException(status_code=404, detail="Article not found")
+  
+    return article
 
 @router.post('/create_article', response_model=ArticleResponse, summary="Создать статью")
 async def create_article_router(data: ArticleCreate, db: sessionDep, current_user: userDep):
