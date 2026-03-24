@@ -8,7 +8,6 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str
     ADMIN_EMAIL: str
-    MODE: str
 
     model_config = SettingsConfigDict(env_file=".env")
 
