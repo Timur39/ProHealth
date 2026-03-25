@@ -1,16 +1,24 @@
 import './Article.scss'
-import Button from '@/components/ui/Button/Button'
+import Button from '@/components/ui/Button'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchArticle } from "@/api/articles";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-const Article = (props) => {
-  const {
-    src = 'https://via.placeholder.com/600x400',
-    title = 'Как улучшить качество сна',
-    description = 'Советы по созданию идеальной спальни и режима для здорового сна',
-    slug = 'article-title',
-    author = 'Тимур Щипливцев',
-    date = '2026-01-01',
-    text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  } = props
+const Article = () => {
+  const { slug } = useParams();
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchArticle(slug)
+      .then((data) => setArticle(data))
+      .finally(() => setLoading(false));
+  }, [slug]);
+
+  if (loading) return <p>Загрузка...</p>;
+  if (!article) return <p>Статья не найдена</p>;
 
   const url = window.location.href
 
@@ -23,11 +31,11 @@ const Article = (props) => {
   return (
     <div className="article">
       <div className="article__body">
-        <h1 className="h1 article__title">{title}</h1>
-        <p className="article__description">{description}</p>
+        <h1 className="h1 article__title">{article.title}</h1>
+        <p className="article__description">{article.description}</p>
         <div className="article__meta">
-          <p className="article__meta-date">Дата: {date}</p>
-          <p className="article__meta-author">Автор: {author}</p>
+          <p className="article__meta-date">Дата: {article.created_at.split('T')[0]}</p>
+          <p className="article__meta-author">Автор: {article.author.name}</p>
         </div>
         <div className="article__buttons">
           <Button className="article__button button--transparent button--link" type="button">
@@ -54,7 +62,9 @@ const Article = (props) => {
         </div>
       </div>
       <div className="article__content container">
-        <p>{text}</p>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {article.content}
+        </ReactMarkdown>
       </div>
     </div>
   )

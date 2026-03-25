@@ -5,7 +5,7 @@ from alembic import context
 from sqlalchemy.ext.asyncio import create_async_engine
 
 from app.db.session import Base
-from app.db.session import DATABASE_URL
+from app.core.config import settings
 from app.models import article, user
 
 # this is the Alembic Config object, which provides
@@ -31,7 +31,7 @@ target_metadata = Base.metadata
 
 def run_migrations_offline():
     context.configure(
-        url=DATABASE_URL,
+        url=settings.DATABASE_URL,
         target_metadata=target_metadata,
         literal_binds=True,
         render_as_batch=True,
@@ -42,7 +42,7 @@ def run_migrations_offline():
 
 
 async def run_migrations_online():
-    connectable = create_async_engine(DATABASE_URL)
+    connectable = create_async_engine(settings.DATABASE_URL)
 
     async with connectable.connect() as connection:
         await connection.run_sync(

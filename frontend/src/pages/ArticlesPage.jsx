@@ -1,6 +1,6 @@
-import Header from '@/components/layouts/Header/Header'
-import Footer from '@/components/layouts/Footer/Footer'
-import Articles from '@/components/ui/Articles/Articles'
+import Header from '@/components/layouts/Header'
+import Footer from '@/components/layouts/Footer'
+import Articles from '@/components/ui/Articles'
 
 const ArticlesPage = () => {
 

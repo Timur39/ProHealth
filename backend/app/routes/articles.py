@@ -26,7 +26,8 @@ async def get_article_by_slug_router(slug: str, db: sessionDep):
 async def create_article_router(data: ArticleCreate, db: sessionDep, current_user: userDep):
     article = await ArticleService.create_article(
         title=data.title, 
-        content=data.content, 
+        content=data.content,
+        src=data.src,
         db=db, 
         author_id=current_user.id
     )

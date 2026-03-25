@@ -1,11 +1,17 @@
 import './Articles.scss'
-import ArticleCard from '@/components/ui/ArticleCard/ArticleCard'
+import { useEffect, useState } from "react";
+import ArticleCard from '@/components/ui/ArticleCard'
+import { fetchArticles } from '@/api/articles'
+
 
 const Articles = (props) => {
-  const {
-    className,
-    articles = [],
-  } = props
+  const { className } = props
+
+  const [articles, setArticles] = useState([])
+
+  useEffect(() => {
+    fetchArticles().then(setArticles);
+  }, []);
 
   return (
     <section className={`articles container ${className}`}>
@@ -14,7 +20,7 @@ const Articles = (props) => {
         {articles.map((article) => (
             <ArticleCard
               className="articles__item"
-              key={article.slug}
+              key={article.id}
               {...article}
             />
         ))}

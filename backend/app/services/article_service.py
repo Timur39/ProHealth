@@ -35,6 +35,7 @@ class ArticleService:
     async def create_article(
         title: str,
         content: str,
+        src: str,
         db: AsyncSession,
         author_id: int,
     ):
@@ -43,6 +44,7 @@ class ArticleService:
         article = Article(
             title=title,
             content=content,
+            src=src,
             slug=slug,
             author_id=author_id)
         
@@ -84,6 +86,7 @@ class ArticleService:
         article_id: int,
         title: str,
         content: str,
+        src: str,
         author_id: int,
     ):
         article = await ArticleService.get_article_by_id(article_id, db)
@@ -98,6 +101,7 @@ class ArticleService:
 
         article.title = title
         article.content = content
+        article.src = src
         article.status = "pending"
 
         await db.commit()

@@ -37,6 +37,8 @@ app.add_middleware(
         "http://localhost:5500",
         "http://127.0.0.1:5173",
         "http://localhost:5173",
+        "http://localhost:6379",
+        "http://127.0.0.1:6379",        
     ],
     allow_credentials=True,
     allow_methods=["GET", "PUT", "POST", "DELETE"],

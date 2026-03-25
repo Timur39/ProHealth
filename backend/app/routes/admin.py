@@ -5,7 +5,7 @@ from app.dependencies.auth import adminDep
 from app.services.article_service import ArticleService
 from app.schemas.article import ArticleResponse
 
-router = APIRouter(prefix="/admin", tags=["admin"])
+router = APIRouter(prefix="/admin", tags=["Admin"])
 
 # 📋 Все статьи на модерацию
 @router.get("/articles/pending", response_model=list[ArticleResponse])

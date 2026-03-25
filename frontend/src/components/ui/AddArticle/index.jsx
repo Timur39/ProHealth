@@ -1,16 +1,14 @@
-import Button from '@/components/ui/Button/Button'
-import Field from '@/components/ui/Field/Field'
+import Button from '@/components/ui/Button'
+import Field from '@/components/ui/Field'
 import './AddArticle.scss'
 
 const AddArticle = () => {
-
 
   const cancelHandler = (e) => {
     e.preventDefault()
 
     window.location.href = '/'
   }
-
 
   return (
     <div className="add-article container">
@@ -20,7 +18,7 @@ const AddArticle = () => {
       </div>
       <form className="add-article__form form">
         <Field
-          className="form__title"
+          className="add-article__title form__title"
           name="title"
           label="Заголовок статьи *"
           type="text"
@@ -28,7 +26,7 @@ const AddArticle = () => {
           required
         />
         <Field
-          className="form__description"
+          className="add-article__description form__description"
           name="description"
           label="Описание статьи *"
           type="text"
@@ -36,7 +34,7 @@ const AddArticle = () => {
           required
         />
         <Field
-          className="form__content"
+          className="add-article__content form__content"
           isTextArea={true}
           name="content"
           label="Содержание статьи *"
@@ -44,16 +42,16 @@ const AddArticle = () => {
           placeholder="Напишите полный текст статьи здесь..."
           required
         />
+        {/*<Field*/}
+        {/*  className="form__author"*/}
+        {/*  name="author"*/}
+        {/*  label="Автор? *"*/}
+        {/*  type="text"*/}
+        {/*  placeholder="Ваше имя"*/}
+        {/*  required*/}
+        {/*/>*/}
         <Field
-          className="form__author"
-          name="author"
-          label="Автор? *"
-          type="text"
-          placeholder="Ваше имя"
-          required
-        />
-        <Field
-          className="form__image"
+          className="add-article__image form__image"
           name="image"
           label="Превью для статьи (URL) *"
           type="text"

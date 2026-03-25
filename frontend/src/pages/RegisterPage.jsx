@@ -1,18 +1,17 @@
+import RegisterForm from "@/components/ui/RegisterForm";
 import Header from '@/components/layouts/Header'
 import Footer from '@/components/layouts/Footer'
-import AddArticle from '@/components/ui/AddArticle'
 
-const ArticlesPage = () => {
-
+function RegisterPage() {
   return (
     <>
       <Header />
       <main>
-        <AddArticle />
+        <RegisterForm />
       </main>
       <Footer />
     </>
-  )
+  );
 }
 
-export default ArticlesPage
+export default RegisterPage;

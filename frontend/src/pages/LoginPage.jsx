@@ -1,18 +1,17 @@
+import LoginForm from "@/components/ui/LoginForm";
 import Header from '@/components/layouts/Header'
 import Footer from '@/components/layouts/Footer'
-import AddArticle from '@/components/ui/AddArticle'
-
-const ArticlesPage = () => {
+function LoginPage() {
 
   return (
     <>
       <Header />
       <main>
-        <AddArticle />
+        <LoginForm />
       </main>
       <Footer />
     </>
-  )
+  );
 }
 
-export default ArticlesPage
+export default LoginPage;
