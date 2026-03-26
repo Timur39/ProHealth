@@ -34,6 +34,7 @@ class ArticleService:
     @staticmethod
     async def create_article(
         title: str,
+        description: str,
         content: str,
         src: str,
         db: AsyncSession,
@@ -43,6 +44,7 @@ class ArticleService:
 
         article = Article(
             title=title,
+            description=description,
             content=content,
             src=src,
             slug=slug,
@@ -61,6 +63,13 @@ class ArticleService:
     async def get_all_articles(db: AsyncSession):
         result = await db.execute(select(Article))
 
+        return result.scalars().all()
+    
+    @staticmethod
+    async def get_user_articles(db: AsyncSession, user_id: int):
+        result = await db.execute(
+            select(Article).where(Article.author_id == user_id)
+        )
         return result.scalars().all()
 
     # Получение статьи по slug'у

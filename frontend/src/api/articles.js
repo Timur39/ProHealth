@@ -10,8 +10,8 @@ export async function fetchArticle(slug) {
   return res.data;
 }
 
-export async function createArticle(article) {
-  const res = await api.post("/articles", ...article);
+export default async function createArticle(title, content, description, src) {
+  const res = await api.post("/articles", {title, content, description, src});
   return res.data
 }
 

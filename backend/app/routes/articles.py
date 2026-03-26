@@ -22,10 +22,16 @@ async def get_article_by_slug_router(slug: str, db: sessionDep):
   
     return article
 
-@router.post('/create_article', response_model=ArticleResponse, summary="Создать статью")
+@router.get('/me', summary="Получить все статьи текущего пользователя")
+@cache(expire=300)
+async def get_my_articles(db: sessionDep, current_user: userDep):
+    return await ArticleService.get_user_articles(db, current_user.id)
+
+@router.post('/', response_model=ArticleResponse, summary="Создать статью")
 async def create_article_router(data: ArticleCreate, db: sessionDep, current_user: userDep):
     article = await ArticleService.create_article(
         title=data.title, 
+        description=data.description,
         content=data.content,
         src=data.src,
         db=db, 
@@ -33,7 +39,6 @@ async def create_article_router(data: ArticleCreate, db: sessionDep, current_use
     )
 
     return article
-
 
 @router.put('/update_article/{slug}', summary="Обновить статью")
 async def update_article(
