@@ -1,0 +1,18 @@
+@use '@/styles/functions' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/media' as *;
+
+
+.auth {
+    padding: rem(20);
+
+    &__title {
+        margin-bottom: rem(10);
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(18);
+    }
+}

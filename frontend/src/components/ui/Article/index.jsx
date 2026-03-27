@@ -61,7 +61,7 @@ const Article = () => {
           </Button>
         </div>
       </div>
-      <div className="article__content container">
+      <div className="article__content markdown container">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {article.content}
         </ReactMarkdown>

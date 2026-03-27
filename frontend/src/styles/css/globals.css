@@ -370,8 +370,9 @@ button[aria-label]::before {
   content: "";
 }
 
-.markdown {
-  margin-top: 20px;
+.markdown h1 {
+  font-size: clamp(1.75rem, 1.5082644628rem + 0.9917355372vw, 2.5rem);
+  line-height: 1.3;
 }
 .markdown h1, .markdown h2, .markdown h3 {
   margin: 20px 0 10px;

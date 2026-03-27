@@ -1,7 +1,9 @@
 import './LoginForm.scss'
 import {login} from '@/api/auth'
 import {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
+import Field from '@/components/ui/Field'
+import Button from '../../../components/ui/Button'
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -17,31 +19,35 @@ const LoginForm = () => {
       localStorage.setItem("token", data.access_token);
 
       navigate("/");
-    } catch (err) {
+    } catch {
       alert("Ошибка входа");
     }
   }
 
   return (
-    <div className="auth">
-      <h1>Вход</h1>
-
-      <form onSubmit={handleSubmit}>
-        <input
+    <div className="auth container">
+      <h1 className='auth__title'>Вход</h1>
+      <form className='auth__form' onSubmit={handleSubmit}>
+        <Field
           type="email"
-          placeholder="Email"
+          placeholder="Введите email"
           value={email}
+          label="Email *"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
-
-        <input
+        <Field
           type="password"
-          placeholder="Пароль"
+          placeholder="Введите пароль"
           value={password}
+          label="Пароль *"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-
-        <button type="submit">Войти</button>
+        <Button type="submit">Войти</Button>
+        <Button className="button--transparent button--link">
+          <Link to="/register">Нет аккаунта? Регистрация</Link>
+        </Button>
       </form>
     </div>
   );
