@@ -17,16 +17,18 @@ const Header = () => {
     <header className="header">
       <Logo className="header__logo" />
       <div className="header__actions">
-        
         {token ? (
           <>
             <Button className="button--transparent button--link header__actions-item">
               <Link to="/add-article">Добавить статью</Link>
             </Button>
+            <Button className="button--transparent button--link header__actions-item">
+              <Link to="/profile">Профиль</Link>
+            </Button>
             <Button className="header__actions-item" onClick={handleLogout}>Выйти</Button>
           </>
         ) : (
-          <Button className="header__actions-item">
+          <Button className="header__actions-item button--link">
             <Link to="/login">Войти</Link>
           </Button>
         )}

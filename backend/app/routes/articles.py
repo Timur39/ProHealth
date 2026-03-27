@@ -8,9 +8,14 @@ from app.services.article_service import ArticleService
 router = APIRouter(prefix='/articles', tags=['Articles'])
 
 @router.get('/', response_model=list[ArticleResponse], summary='Получить все статьи')
-@cache(expire=60)
+@cache(expire=300)
 async def get_all_articles_router(db: sessionDep):
     return await ArticleService.get_all_articles(db)
+
+@router.get('/me', summary="Получить все статьи текущего пользователя")
+@cache(expire=60)
+async def get_my_articles(db: sessionDep, current_user: userDep):
+    return await ArticleService.get_user_articles(db, current_user.id)
 
 @router.get('/{slug}', summary="Получить статью по slug'у")
 @cache(expire=300)
@@ -21,11 +26,6 @@ async def get_article_by_slug_router(slug: str, db: sessionDep):
         raise HTTPException(status_code=404, detail="Article not found")
   
     return article
-
-@router.get('/me', summary="Получить все статьи текущего пользователя")
-@cache(expire=300)
-async def get_my_articles(db: sessionDep, current_user: userDep):
-    return await ArticleService.get_user_articles(db, current_user.id)
 
 @router.post('/', response_model=ArticleResponse, summary="Создать статью")
 async def create_article_router(data: ArticleCreate, db: sessionDep, current_user: userDep):

@@ -1,0 +1,7 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+col .profile__card {
+  border: var(--border);
+}/*# sourceMappingURL=Profile.css.map */

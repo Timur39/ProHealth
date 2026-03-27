@@ -7,6 +7,7 @@ import AddArticlePage from '@/pages/AddArticlePage'
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
 import PrivateRoute from '@/utils/PrivateRoute'
+import ProfilePage from '@/pages/ProfilePage'
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
       }  />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   )
 }

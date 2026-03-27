@@ -1,0 +1,30 @@
+@use '@/styles/functions' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/media' as *;
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+
+    &__articles-list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(12);
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: rem(16);
+        border: var(--border);
+        padding: rem(15);
+        border-radius: rem(8);
+    
+        &-title {
+            * {
+                text-decoration: none;
+            }
+        }
+    }
+}

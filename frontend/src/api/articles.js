@@ -15,6 +15,11 @@ export default async function createArticle(title, content, description, src) {
   return res.data
 }
 
+export async function fetchMyArticles() {
+  const res = await api.get("/articles/me");
+  return res.data
+}
+
 export async function updateArticle(id, article) {
   const res = await api.put(`/articles/${id}`, ...article);
   return res.data;
