@@ -12,7 +12,7 @@ from app.routes import articles, auth, admin
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     redis_client = redis.from_url(
-        "redis://localhost",
+        "redis://89.111.142.190",
         encoding="utf-8",
         decode_responses=True
     )
@@ -29,7 +29,7 @@ app = FastAPI(title="ProHealth API", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "*"
+        "http://89.111.142.190"
     ],
     allow_credentials=True,
     allow_methods=["GET", "PUT", "POST", "DELETE"],
