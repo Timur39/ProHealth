@@ -18,6 +18,8 @@ async def register(user: UserCreate, db: sessionDep):
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
 
+    print(user.email, user.password, user.name)
+
     new_user = User(
         email=user.email,
         password=hash_password(user.password),
