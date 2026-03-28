@@ -6,7 +6,7 @@ COPY pyproject.toml poetry.lock ./
 
 RUN python -m pip install --default-timeout=100 --index-url https://pypi.org/simple --no-cache-dir poetry==2.3.2 \
     && poetry config virtualenvs.create false \
-    && poetry install --without dev --no-interaction --no-ansi \
+    && poetry install --only main --no-interaction --no-ansi \
     && rm -rf $(poetry config cache-dir)/{cache,artifacts}
 
 COPY . .
