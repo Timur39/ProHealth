@@ -6,8 +6,6 @@ from app.core.config import settings
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:
-    print(password)
-
     return pwd_context.hash(password)
 
 def verify_password(plain: str, hashed: str) -> bool:
