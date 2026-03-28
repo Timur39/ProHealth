@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class Settings(BaseSettings):
     AUTH_SECRET_KEY: str
     ALGORITHM: str = "HS256"

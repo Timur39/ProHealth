@@ -7,7 +7,7 @@ from sqlalchemy import select
 
 from app.dependencies.db import sessionDep
 from app.models.user import User
-from app.core.security import SECRET_KEY, ALGORITHM
+from app.core.config import settings
 
 security = HTTPBearer()
 
@@ -18,7 +18,7 @@ async def get_current_user(
     token = credentials.credentials
 
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, settings.AUTH_SECRET_KEY, algorithms=[settings.ALGORITHM])
         user_id = payload.get("user_id")
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")
