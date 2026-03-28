@@ -11,4 +11,6 @@ RUN python -m pip install --default-timeout=100 --index-url https://pypi.org/sim
 
 COPY . .
 
+RUN alembic upgrade head
+
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
