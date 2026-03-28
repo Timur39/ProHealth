@@ -6,8 +6,12 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install --without=dev --no-ansi --no-root
+RUN pip install poetry && \
+    poetry config virtualenvs.create false && \
+    poetry install --no-dev --no-ansi
+
+EXPOSE 8000
 
 COPY . .
 
-CMD ["poetry", "run", "python", "main.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
