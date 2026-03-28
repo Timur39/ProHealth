@@ -8,7 +8,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String, unique=True)
     name = Column(String, unique=True)
-    password = Column(String)
+    password = Column(String, nullable=False)
     role = Column(String, default="user")
 
     articles = relationship("Article", back_populates="author")
